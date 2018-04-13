@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from magic import getcard
+import json
+import urllib.request
 
 app=Flask(__name__)
 
@@ -8,16 +10,13 @@ app=Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('home.html', card = getcard('https://api.scryfall.com/cards/random'),
-    card2=getcard('https://api.scryfall.com/cards/random'),
-    card3=getcard('https://api.scryfall.com/cards/random'),
-    card4=getcard('https://api.scryfall.com/cards/random'),
-    card5=getcard('https://api.scryfall.com/cards/random'),
-    card6=getcard('https://api.scryfall.com/cards/random'),
-    card7=getcard('https://api.scryfall.com/cards/random'),
-    card8=getcard('https://api.scryfall.com/cards/random'),
-    card9=getcard('https://api.scryfall.com/cards/random'),
-    card10=getcard('https://api.scryfall.com/cards/random'))
+    return render_template('home.html')
+
+@app.route('/background_card')
+def getcard():
+    return jsonify(json.load(urllib.request.urlopen('https://api.scryfall.com/cards/random'))['image_uris']['normal'])
+
+
 
 @app.route('/about')
 def about():

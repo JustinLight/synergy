@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <title>Synergy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 
   </head>
   <body>
@@ -12,17 +15,41 @@
     <div class='container'>
       {% block body %}{% endblock %}
     </div>
-    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.js"></script>
-    <script>$("#magiccard1").flip();</script>
-    <script>$("#magiccard2").flip();</script>
-    <script>$("#magiccard3").flip();</script>
-    <script>$("#magiccard4").flip();</script>
-    <script>$("#magiccard5").flip();</script>
-    <script>$("#magiccard6").flip();</script>
-    <script>$("#magiccard7").flip();</script>
-    <script>$("#magiccard8").flip();</script>
-    <script>$("#magiccard9").flip();</script>
-    <script>$("#magiccard10").flip();</script>
+
+    <script type=text/javascript>
+
+    $(function() {
+
+      $('img').bind('click', function() {
+        $(this).parent().toggleClass('flipped');
+        console.log("click");
+
+        if ($( this ).hasClass( "front" )) {
+        $(this).siblings().addClass("active");
+        $.ajax({
+          type:'get',
+          url: '/background_card',
+          cashe:false,
+          dataType:'json',
+          success: function(data){
+
+            console.log(JSON.stringify(data))
+            $('.active' ).attr("src",JSON.stringify(data));
+            $('.active').removeClass("active")
+         },
+         error: function(request, status, error) {
+           console.log(error)
+         }
+       })
+        };
+
+
+        });
+      return false;
+      });
+
+
+  </script>
   </body>
 </html
