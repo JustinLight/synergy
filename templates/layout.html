@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Synergy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-   <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
@@ -35,7 +35,8 @@
           success: function(data){
 
             console.log(JSON.stringify(data))
-            $('.active' ).attr("src",JSON.stringify(data));
+            $('.active' ).attr("src",data);
+            console.log($('.active' ).attr("src"))
             $('.active').removeClass("active")
          },
          error: function(request, status, error) {
