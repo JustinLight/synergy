@@ -16,37 +16,55 @@
       {% block body %}{% endblock %}
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.js"></script>
-
     <script type=text/javascript>
 
-    $(function() {
+    $(document).ready(function() {
+      $("img.back").each(function(i) {
 
-      $('img').bind('click', function() {
-        $(this).parent().toggleClass('flipped');
-        console.log("click");
-
-        if ($( this ).hasClass( "front" )) {
-        $(this).siblings().addClass("active");
+        $(this).addClass("active"+i);
         $.ajax({
           type:'get',
           url: '/background_card',
           cashe:false,
           dataType:'json',
           success: function(data){
-
-            console.log(JSON.stringify(data))
-            $('.active' ).attr("src",data);
-            console.log($('.active' ).attr("src"))
-            $('.active').removeClass("active")
+            console.log("running")
+            $('.active'+i ).attr("src",data);
+            $('.active'+i).removeClass("active"+i)
          },
          error: function(request, status, error) {
            console.log(error)
+       }
+
+    })
+  })
+  });
+
+
+
+    $(function() {
+
+      $('img').bind('click', function() {
+
+        if ($( this ).hasClass( "back" )) {
+          $(this).addClass("active");
+          $.ajax({
+            type:'get',
+            url: '/background_card',
+            cashe:false,
+            dataType:'json',
+            success: function(data){
+              $('.active' ).attr("src",data);
+              $('.active').removeClass("active")
+           },
+           error: function(request, status, error) {
+             console.log(error)
          }
-       })
-        };
 
-
-        });
+        })
+      };
+      $(this).parent().toggleClass('flipped')
+    });
       return false;
       });
 

@@ -1,5 +1,4 @@
 from flask import Flask, render_template, jsonify
-from magic import getcard
 import json
 import urllib.request
 
