@@ -16,38 +16,23 @@
       {% block body %}{% endblock %}
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.js"></script>
+
     <script type=text/javascript>
-
-    $(document).ready(function() {
-      $("img.back").each(function(i) {
-
-        $(this).addClass("active"+i);
-        $.ajax({
-          type:'get',
-          url: '/background_card',
-          cashe:false,
-          dataType:'json',
-          success: function(data){
-            console.log("running")
-            $('.active'+i ).attr("src",data);
-            $('.active'+i).removeClass("active"+i)
-         },
-         error: function(request, status, error) {
-           console.log(error)
-       }
-
-    })
-  })
-  });
-
-
 
     $(function() {
 
-      $('img').bind('click', function() {
+      $('button').bind('click', function() {
+        if ($( this ).siblings(".flip-container").children(".flipper").hasClass( "flipped" )) {
+          console.log("True")
+          $(this).siblings(".flip-container").children(".flipper").toggleClass('flipped') }
+        else {
+          console.log("False")
+        };
 
-        if ($( this ).hasClass( "back" )) {
-          $(this).addClass("active");
+
+
+
+          $(this).siblings(".flip-container").children(".flipper").children(".back").addClass("active");
           $.ajax({
             type:'get',
             url: '/background_card',
@@ -55,17 +40,20 @@
             dataType:'json',
             success: function(data){
               $('.active' ).attr("src",data);
-              $('.active').removeClass("active")
+              $.when($.ajax("/background_card").done(function(){
+              $('.active').parent(".flipper").toggleClass('flipped');
+              $('.active').removeClass("active");
+              }))
            },
            error: function(request, status, error) {
              console.log(error)
          }
 
         })
-      };
-      $(this).parent().toggleClass('flipped')
-    });
+
+
       return false;
+      });
       });
 
 
