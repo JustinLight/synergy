@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synergy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
@@ -60,5 +61,25 @@
 
 
   </script>
+  <script>
+
+  $('img').on('click', function() {
+    if ($(this).hasClass("back")) {
+      var url = this.src;
+      document.getElementById('modalImg').src = "https://img.scryfall.com/cards/large" + url.substring(36);
+      document.getElementById('myModal').style.display = "block";
+    }
+  });
+
+
+var span = document.getElementsByClassName("xclose")[0];
+
+span.onclick = function() {
+  document.getElementById('myModal').style.display = "none";
+}
+  </script>
+
+
+
   </body>
 </html

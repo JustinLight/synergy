@@ -13,7 +13,7 @@ def index():
 
 @app.route('/background_card')
 def getcard():
-    return jsonify(json.load(urllib.request.urlopen('https://api.scryfall.com/cards/random'))['image_uris']['normal'])
+    return jsonify(json.load(urllib.request.urlopen('https://api.scryfall.com/cards/random'))['image_uris']['small'])
 
 
 
