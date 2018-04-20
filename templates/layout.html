@@ -64,10 +64,12 @@
   <script>
 
   $('img').on('click', function() {
-    if ($(this).hasClass("back")) {
-      var url = this.src;
-      document.getElementById('modalImg').src = "https://img.scryfall.com/cards/large" + url.substring(36);
-      document.getElementById('myModal').style.display = "block";
+    if ($(window).width() > 991) {
+      if ($(this).hasClass("back")) {
+        var url = this.src;
+        document.getElementById('modalImg').src = "https://img.scryfall.com/cards/large" + url.substring(37);
+        document.getElementById('myModal').style.display = "block";
+      }
     }
   });
 
