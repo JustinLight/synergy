@@ -1,9 +1,7 @@
 from flask import Flask, render_template, jsonify
-import json
-import urllib.request
+import scrython
 
 app=Flask(__name__)
-
 
 
 
@@ -13,7 +11,8 @@ def index():
 
 @app.route('/background_card')
 def getcard():
-    return jsonify(json.load(urllib.request.urlopen('https://api.scryfall.com/cards/random'))['image_uris']['normal'])
+    card = scrython.cards.Random()
+    return jsonify(card.image_uris['normal']) 
 
 
 
