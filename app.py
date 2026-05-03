@@ -116,3 +116,9 @@ def about():
 if __name__=='__main__':
     logger.info("Starting Synergy Flask server")
     app.run(debug=True)
+
+
+#TODO:
+# - Add user profile page with card collection and deck management
+# - Add a section for users to add notes for their campaign or quest ideas
+# - Update passwords to force complexity requirements and add password reset functionality
